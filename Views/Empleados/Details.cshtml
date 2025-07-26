@@ -1,0 +1,105 @@
+﻿@model AppCrud.Models.Empleado
+
+@{
+    ViewData["Title"] = "Detalles del Empleado";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h4 class="mb-0"><i class="fas fa-user"></i> @ViewData["Title"]</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <dl class="row">
+                                        <dt class="col-sm-6">@Html.DisplayNameFor(model => model.Nombre):</dt>
+                                        <dd class="col-sm-6">@Html.DisplayFor(model => model.Nombre)</dd>
+
+                                        <dt class="col-sm-6">@Html.DisplayNameFor(model => model.Apellido):</dt>
+                                        <dd class="col-sm-6">@Html.DisplayFor(model => model.Apellido)</dd>
+
+                                        <dt class="col-sm-6">@Html.DisplayNameFor(model => model.Email):</dt>
+                                        <dd class="col-sm-6">
+                                            <a href="mailto:@Model.Email">@Html.DisplayFor(model => model.Email)</a>
+                                        </dd>
+
+                                        <dt class="col-sm-6">@Html.DisplayNameFor(model => model.Telefono):</dt>
+                                        <dd class="col-sm-6">@Html.DisplayFor(model => model.Telefono)</dd>
+                                    </dl>
+                                </div>
+                                <div class="col-md-6">
+                                    <dl class="row">
+                                        <dt class="col-sm-6">@Html.DisplayNameFor(model => model.Cargo):</dt>
+                                        <dd class="col-sm-6">@Html.DisplayFor(model => model.Cargo)</dd>
+
+                                        <dt class="col-sm-6">@Html.DisplayNameFor(model => model.Salario):</dt>
+                                        <dd class="col-sm-6">
+                                            <span class="badge bg-success fs-6">@Model.Salario.ToString("C")</span>
+                                        </dd>
+
+                                        <dt class="col-sm-6">@Html.DisplayNameFor(model => model.FechaContratacion):</dt>
+                                        <dd class="col-sm-6">@Model.FechaContratacion.ToString("dd/MM/yyyy")</dd>
+
+                                        <dt class="col-sm-6">Estado:</dt>
+                                        <dd class="col-sm-6">
+                                            @if (Model.Activo)
+                                            {
+                                                <span class="badge bg-success">
+                                                    <i class="fas fa-check-circle"></i> Activo
+                                                </span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge bg-danger">
+                                                    <i class="fas fa-times-circle"></i> Inactivo
+                                                </span>
+                                            }
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card bg-light">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-user-circle fa-5x text-muted mb-3"></i>
+                                    <h5 class="card-title">@Model.Nombre @Model.Apellido</h5>
+                                    <p class="card-text text-muted">@Model.Cargo</p>
+
+                                    @{
+                                        var diasTrabajando = (DateTime.Now - Model.FechaContratacion).Days;
+                                        var añosTrabajando = diasTrabajando / 365.0;
+                                    }
+
+                                    <small class="text-muted">
+                                        Trabajando desde hace @diasTrabajando días
+                                        (@añosTrabajando.ToString("F1") años)
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 d-flex justify-content-between">
+                        <a asp-action="Index" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> Volver a la lista
+                        </a>
+                        <div>
+                            <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-warning me-2">
+                                <i class="fas fa-edit"></i> Editar
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@Model?.Id" class="btn btn-danger">
+                                <i class="fas fa-trash"></i> Eliminar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

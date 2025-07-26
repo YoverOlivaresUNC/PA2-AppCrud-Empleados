@@ -1,0 +1,29 @@
+﻿# Archivos compilados
+bin/
+obj/
+.vs/
+
+# Archivos de usuario
+*.user
+*.suo
+
+# Base de datos
+*.mdf
+*.ldf
+
+# Logs
+*.log
+
+# Packages
+packages/
+
+# Visual Studio
+.vscode/
+*.userprefs
+
+# .NET Core
+project.lock.json
+artifacts/
+
+# Entity Framework
+Migrations/*.designer.cs
